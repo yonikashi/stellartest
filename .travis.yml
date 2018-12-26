@@ -43,9 +43,9 @@ before_script:
 - pip -V
 - pip install --user invoke
 - pip install --user pipenv
-- git clone https://github.com/kinecosystem/blockchain-ops.git
+- git clone https://github.com/yonikashi/blocktest.git
 script:
-- cd blockchain-ops
+- cd blocktest
 - pipenv sync
 - pipenv run invoke build-core --latest
 - docker images
