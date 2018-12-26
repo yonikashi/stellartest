@@ -1,16 +1,21 @@
 language: cpp
+dist: xenial
 sudo: false
-
 compiler:
 - clang
 - gcc
-
+env:
+  global:
+  - COMMIT=${TRAVIS_COMMIT::6}
+  - secure: NRwwEPoHTUXc8qGlty6k3haDiVFtCShaPYCa/NKQTIzmXpm2YxuhCRFTybm/aWwNKCBtKOxrFJSxx0GCJWPfkX4Vs220m9PjL+5r2C9TbCrzab77MHhdEfnKhOAsHqsXwgu35xjcgkQz7B0K5XnCVU97a5GYwYLtrAFl2LCx3RpZpTTlg3ShmVeuHXM5HB35j3Jc6h6E1tnJ1xLzDtfG8lTTMJAEUwH3S7ygzAilkBehgLLQeURAFJYtwxt6J2YWlXyvADcuq7UQblY9jvtxxI+FSIMSdxTWFeSUbS+Bk3bbHiC0BhDNfPW5iQHy15GTOE1gtLHX9vnWibyRfwvPC1ETbz2j1ASM56Pi7sHLL+Mz7VDpVKLvAEOxBDY0tF9nnZHwFoOHu3AdlW+ED63ycZBhF7FfRUhUSvCwcJQDCl2QUb1SFmhnBndLHyB52BNPHlYECW70RqKkK9mkq33y6updYklAG5ibZGf6UcUc7MLPvOhhwIQ/m+xldJLar1YI/iW6gO9SuN7vO9B+EVPK3HJRaxt7vOliQxuPsxQq8Y3zLRHfzjyvn4hyrPseiHmDZGCLpLOCiSUvIDsyAeDWstWBSm3fBbJlnCd5oX+dRRHtTaj8Z6zSxv4fYRCgHqxszeVUt7MqLd53U5/Q/aIA2Fg2tesubYnmQIUNyZdDaNk=
+  - secure: ukg8IlViYK/1L/hl9zmIR8Urh653D8EULs+kKVRHCRq5nNxncGMeKrLnVK75OrzUCxuDBXlk/mAaG6SpKrF6Ie9W26oh6CFq5EVxoykt8HiQaIkSI0Y9LaoOdL3sGMJP8ayg8jfvNJdU5da5U8nA9wYLwGEWBEs85lCjW1hMNLrEsBopPWd104LG/0WwlyNvvHqI5EBCmFlFfMHL1fNlAOOMbZfE8DN+B4NwDQgCenZ5BpGR+CZO87ddBkeyjvU1nSIvoCgNHLW70PV+iVFa8frd+jNwxzK+/qOdfLl/wLOuciR9CiEuzve2M06cXsLbWzG587cK0GQYXYGCIR4lNZ0MVLKupud6Zlgp9lYakMfluV9m5Ohr3AzvcbtNmy9AfHpDOj83lKdSDABCTUymAiBSsSfgBDbUaszOiFGKYmFPtDzAoCBDNJfgA7hCWdgnzRmYBP6dVl02514awPtUwU6DckgVzivOpC4UHy9H4ettosFJNywta7W5f+q7X5wgdLiZB/G3ZSI03W/IjrbFj8n5L2YCTZNuqub8MxXfb3MVoXtogEeTexnZz6pliXKI7aFhZNO4vET2aOYCLUVXfPpYGKdS8NAXyu7/7apRn9WR7OeOCTig7ryApAt7euiKChhOV7PnasOYo8yoZ+7QWNcApDCZ6YebSDlH3URiLZI=
+  - secure: fWJB0u0THagh4hPQHEC6rfEd/a4jgNe3H3CPDg7yHG7aMHTK6dQ13lH1h0ASY3teUR5zAakuyc+jXoG5se1vdnCwjkBN2pD4YmIJYQROGmzTpN9Kvqmhr70FcWa/GAzUetSxE1OPEinAvHJcFoGZzw47sKTlE1GaX0sgy2DP8BnixNwbLJAAkCWgFbkgqiGjfDkQvWrsYIi1rNhGkMoD3HQ1EMiLT1sPqmenWbcJIx/BRigGp/oEXi2ow5VCT/M+F7jbqhmN3EL0Lz4D4kx5Jvc4B7oLGpPjUygMJ80Y1NfF0t2+Lr8bzERhsE95TfwO7hJLi1dfBUodOBUdQk1OyKLaRPgmKHbFNPUqZ+hMDZ08gn02DodnmTxMH1anfUaVDA46yyDQtbqdWCMZun2ccdlQxSjFnR4sOxOEYN80yVhpXPxtaHO1Vg7R+/EK0HAy7bfi4nPiL+qOfGnLjECrkRIV/qNyxW2u52ww4UqT+wWF4uEmFhlZ75RFg/lHgfJHhaVhKqzMDfEIsnJ9lgaac0lnch8Mvw1bqcG7DzZ31RNABaQsZp/SnYSFJ7jiS64jphgcTxEkhg287o47ZuQItynpui9HI1VE7uF60ATwXMP8PuADDwGO+CZm7LCdYHmQiuWWVtRVzb+c/1yuPjA80lJKJJVH6Kbg55T64HlSksY=
+services:
+- docker
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
   apt:
     sources:
-    - llvm-toolchain-trusty-3.5
-    - llvm-toolchain-trusty-5.0
     - ubuntu-toolchain-r-test
     packages:
     - autoconf
@@ -26,20 +31,38 @@ addons:
     - pkg-config
     - clang-format-5.0
     - pandoc
-
-script: ./travis-build.sh
-
+    - libffi-dev
+    - build-essential
+    - docker-ce
+before_install:
+- 
+install:
+- 
+before_script:
+- pip -V
+- pip install --user invoke
+- pip install --user pipenv
+- git clone https://github.com/kinecosystem/blockchain-ops.git
+script:
+- cd blockchain-ops
+- pipenv sync
+- pipenv run invoke build-core --$COMMIT
+- docker tag images_stellar-core yonikashi/blocktest
+after_success:
+- docker login --username=$DOCKER_USER -p $DOCKER_PASS
+- export REPO=yonikashi/blocktest
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
+- echo $REPO:$TAG:$COMMIT
+- docker build -f Dockerfile -t $REPO:$COMMIT .
+- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker push $REPO
 cache:
   directories:
-  - $HOME/.ccache
-  - .libs
-
-notifications:
-  email: false
-  slack:
-    secure: VYA87p8f6PgmOhL8b8DM4t6k8vPYjULpT7LBhvmNBNe8iiNDtTzLpRbUXg6t6Ij7Y3MU4uOJ5K617hCqs81VfRoOakbiYTWHeYSsMmIrUM4+d5MZM4pVP0/bCE49qt06bZINorh6IHChhfuvod3uyUqbgNrwRf/qDIIboFDIty8=
-
+  - "$HOME/.ccache"
+  - ".libs"
 branches:
- only:
- - auto
-
+  only:
+  - master
+  - testbranch
