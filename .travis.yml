@@ -47,7 +47,7 @@ before_script:
 script:
 - cd blockchain-ops
 - pipenv sync
-- pipenv run invoke build-core --${GIT_BRANCH}
+- pipenv run invoke build-core --latest
 - docker images
 - docker tag kinecosystem/stellar-core-build yonikashi/blocktest
 after_success:
