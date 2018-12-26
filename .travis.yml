@@ -49,7 +49,7 @@ script:
 - pipenv sync
 - pipenv run invoke build-core --latest
 - docker images
-- docker tag kinecosystem/stellar-core-build yonikashi/blocktest
+- docker tag images_stellar-core-build yonikashi/blocktest
 after_success:
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
 - export REPO=yonikashi/blocktest
