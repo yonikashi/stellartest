@@ -3,7 +3,7 @@ dist: xenial
 sudo: false
 compiler:
 - clang
-- gcc
+#- gcc
 env:
   global:
   - GIT_BRANCH=latest
@@ -32,9 +32,6 @@ addons:
     - pkg-config
     - clang-format-5.0
     - pandoc
-    - libffi-dev
-    - build-essential
-    - docker-ce
 before_install:
 - 
 install:
@@ -47,7 +44,7 @@ before_script:
 script:
 - cd blocktest
 - pipenv sync
-- pipenv run invoke build-core --v10.0.0
+- pipenv run invoke build-core --version=10.0.0
 - docker images
 - docker tag images_stellar-core yonikashi/blocktest:$COMMIT
 after_success:
