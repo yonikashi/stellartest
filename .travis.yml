@@ -49,14 +49,13 @@ script:
 - pipenv sync
 - pipenv run invoke build-core --${GIT_BRANCH}
 - docker images
-- docker tag images_stellar-core yonikashi/blocktest
+- docker tag kinecosystem/stellar-core-build yonikashi/blocktest
 after_success:
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
 - export REPO=yonikashi/blocktest
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
   ; fi`
 - echo $REPO:$TAG:$COMMIT
-- docker tag images_stellar-core $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push yonikashi/blocktest
 cache:
   directories:
