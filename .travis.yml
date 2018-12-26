@@ -6,6 +6,7 @@ compiler:
 - gcc
 env:
   global:
+  - GIT_BRANCH=testnet
   - COMMIT=${TRAVIS_COMMIT::6}
   - secure: Zh0g3+pGnCvPAC0oYSXuWJj+NWIxZMVVshsrZOmNYDdYrGAMeS1aTQE3Tg8bK+1Hn6dlGSTxq6W4rAUnV3hazueXfOwF/Y0Bojd+q86fX6/eT1YwCVEGmEIxKzv/FCCfTlzNuUCYe+UJ0eNL1Vj9J6MykU2Ibv+tdd9KLWM3K3mdpNoycZMzt3f2aOf6u9ymct6e4+rVDBayZKksoCKiKAJGJCR7R5RcZ6/PolkRT5YfbsYXFYl0+3RDHYuOooOk/bqTDD3U5jrEOC1Gv8z2FOm+Dun9xuhULgswktOcQw8EQkjXVbIvrRWGRn+4+FsdjZqS1XtySub55hXj2TgmYfwS8fP5O4nqQ9ldeECZX9VCrrEvjHUGlq75MUwNGLPw4/JEPMcIwfIjf/k0wgj3SBT2w1RG/gNYHkGnQoWwghBVy7yvQC+TRiaQB2u0U0pKvVmRf48WlAiBO93DFdT1YXLawq0GCRBdPubwoV0Hh3m6Th6iOa0FH23pY15QSD2ysEnqY1kdNqbyATZ54BaSyjo6avGG/P7oEXhPBwh6ufSXvjlie2o6tkE7FGFJfln6flYU838uW50AeEHvPP3FvTzJqEqmrYwi2JUV2kn0wn4TQENyAKKuPP4kW8qdAj8C058Zw/6hx+NIeTCcnY01W3aMoa0a71z+gj87Z64sD6Y=
   - secure: HJeNuHjDNYRvE9VEBIJ7FW/H3vqDHtmt7M5kEBNQ89oKdZee7OEdU+oHNlQMVxkLKI3qj1oIpI2mTbJFmK62N+x8ekBm9eDJjN/UEr1BYLA/swmlscgoibk2Pn7PxhVxqHHSibCPUaAXo1HYgYo9qXbSoQh1XQ/cJD0czacBeHzl05uCJ2OqixSQe8VFrYsUaoueIaIULHjFhQvYjFbVbyfe22SeZpT2opWynrISkbomK3q91dWrn5R/S/DPE64HIr92WHEzblAwPMqjBPlcTOrL5zu+Rp8RyhQvpmm8J/lN02gJJUJznCxXaQTt711V5C+4Dqsz2r4uZtGD4SYAeCrlPuXKY1xnAvDRyNLEYzYgrN4TOFIKsq87aACbVom1ywLlxdDmJ1O8U8J+HQn0oxexH0FBWZH0CR3Kz66oB0b7L26s6bW1v/5J8s0sy4sK/0MB+X6g0VV/v7i0Rr36r/+ahl5iTrCL9L377D6TfZ2Fgaa58TZLPRtyYH7QO5QxBqP26rIB+NVs2hSSjDXRqjXHdzwJIQAuvRW2AIWb34Iim0eXAN4RFOZRYBxIlrEyX7olm74j7NhTVDSpExd2AqlaV7RAr1RT7BXKTcpJK7zZw/Gitfp5L3Gy1DKCFUkIphe15nf56OSD+bkUaUurTStU1JWrikNPjOsoi4woAPg=
@@ -46,7 +47,7 @@ before_script:
 script:
 - cd blockchain-ops
 - pipenv sync
-- pipenv run invoke build-core --${COMMIT}
+- pipenv run invoke build-core --${GIT_BRANCH}
 - docker tag images_stellar-core yonikashi/blocktest
 after_success:
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
