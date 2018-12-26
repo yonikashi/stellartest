@@ -1,5 +1,4 @@
 language: cpp
-dist: xenial
 sudo: false
 compiler:
 - clang
@@ -47,9 +46,9 @@ before_script:
 script:
 - cd blocktest
 - pipenv sync
-- pipenv run invoke build-core --latest
+- pipenv run invoke build-core --v10.0.0
 - docker images
-- docker tag images_stellar-core-build yonikashi/blocktest
+- docker tag images_stellar-core yonikashi/blocktest:$COMMIT
 after_success:
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
 - export REPO=yonikashi/blocktest
