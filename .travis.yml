@@ -48,6 +48,7 @@ script:
 - cd blockchain-ops
 - pipenv sync
 - pipenv run invoke build-core --${GIT_BRANCH}
+- docker images
 - docker tag images_stellar-core yonikashi/blocktest
 after_success:
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
@@ -55,7 +56,6 @@ after_success:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
   ; fi`
 - echo $REPO:$TAG:$COMMIT
-- docker build -f Dockerfile -t $REPO:$COMMIT
 - docker tag images_stellar-core $REPO:travis-$TRAVIS_BUILD_NUMBER
 - docker push yonikashi/blocktest
 cache:
