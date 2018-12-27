@@ -6,6 +6,7 @@ compiler:
 #- gcc
 env:
   global:
+  - CODECOV_TOKEN="e1453df7-ea2c-4282-b045-8cd61b95ce28"
   - GIT_BRANCH=latest
   - COMMIT=${TRAVIS_COMMIT::6}
   - secure: Zh0g3+pGnCvPAC0oYSXuWJj+NWIxZMVVshsrZOmNYDdYrGAMeS1aTQE3Tg8bK+1Hn6dlGSTxq6W4rAUnV3hazueXfOwF/Y0Bojd+q86fX6/eT1YwCVEGmEIxKzv/FCCfTlzNuUCYe+UJ0eNL1Vj9J6MykU2Ibv+tdd9KLWM3K3mdpNoycZMzt3f2aOf6u9ymct6e4+rVDBayZKksoCKiKAJGJCR7R5RcZ6/PolkRT5YfbsYXFYl0+3RDHYuOooOk/bqTDD3U5jrEOC1Gv8z2FOm+Dun9xuhULgswktOcQw8EQkjXVbIvrRWGRn+4+FsdjZqS1XtySub55hXj2TgmYfwS8fP5O4nqQ9ldeECZX9VCrrEvjHUGlq75MUwNGLPw4/JEPMcIwfIjf/k0wgj3SBT2w1RG/gNYHkGnQoWwghBVy7yvQC+TRiaQB2u0U0pKvVmRf48WlAiBO93DFdT1YXLawq0GCRBdPubwoV0Hh3m6Th6iOa0FH23pY15QSD2ysEnqY1kdNqbyATZ54BaSyjo6avGG/P7oEXhPBwh6ufSXvjlie2o6tkE7FGFJfln6flYU838uW50AeEHvPP3FvTzJqEqmrYwi2JUV2kn0wn4TQENyAKKuPP4kW8qdAj8C058Zw/6hx+NIeTCcnY01W3aMoa0a71z+gj87Z64sD6Y=
@@ -58,7 +59,14 @@ install:
   ; fi`
 - echo $REPO:$TAG:$COMMIT
 - docker push yonikashi/blocktest
-
+- build-wrapper-linux-x86-64 --out-dir bw-output make clean all
+- sonar-scanner \
+  -Dsonar.projectKey=yonikashi_stellartest \
+  -Dsonar.organization=yonikashi-github \
+  -Dsonar.sources=. \
+  -Dsonar.cfamily.build-wrapper-output=bw-output \
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.login=595e86266503d537ec9ead1200ebe20eb082abd6
 after_success: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
   tar xzf master.tar.gz &&
