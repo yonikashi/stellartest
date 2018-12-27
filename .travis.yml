@@ -49,7 +49,7 @@ before_install:
 install:
 - cd blockchain-ops
 - pipenv sync
-- pipenv run invoke build-core --branch="kinecosystem/master" --version="10.0.0" -p True
+- pipenv run invoke build-core --branch="kinecosystem/master" --version="testnet" 
 - docker images
 - docker tag kinecosystem/stellar-core yonikashi/blocktest:$TRAVIS_BRANCH-$COMMIT
 ### Docker Image Tagging Rules ###
@@ -59,7 +59,7 @@ install:
   ; fi`
 - echo $REPO:$TAG:$COMMIT
 - docker push yonikashi/blocktest
-- build-wrapper-linux-x86-64 --out-dir bw-output make clean all
+- sudo build-wrapper-linux-x86-64 --out-dir bw-output make clean all
 - sonar-scanner \
   -Dsonar.projectKey=yonikashi_stellartest \
   -Dsonar.organization=yonikashi-github \
@@ -80,7 +80,7 @@ after_success: |
   rm -rf kcov-master &&
   mkdir -p coverage &&
   kcov coverage script.sh &&
-  bash <(curl -s https://codecov.io/bash)
+  sudo bash <(curl -s https://codecov.io/bash)
 
 cache:
   directories:
