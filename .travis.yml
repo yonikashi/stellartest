@@ -59,14 +59,6 @@ install:
   ; fi`
 - echo $REPO:$TAG:$COMMIT
 - docker push yonikashi/blocktest
-- sudo build-wrapper-linux-x86-64 --out-dir bw-output make clean all
-- sonar-scanner \
-  -Dsonar.projectKey=yonikashi_stellartest \
-  -Dsonar.organization=yonikashi-github \
-  -Dsonar.sources=. \
-  -Dsonar.cfamily.build-wrapper-output=bw-output \
-  -Dsonar.host.url=https://sonarcloud.io \
-  -Dsonar.login=595e86266503d537ec9ead1200ebe20eb082abd6
 after_success: |
   wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
   tar xzf master.tar.gz &&
