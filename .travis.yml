@@ -32,28 +32,48 @@ addons:
     - pkg-config
     - clang-format-5.0
     - pandoc
-before_install:
-- 
-install:
-- 
+    - libcurl4-openssl-dev
+    - libelf-dev
+    - libdw-dev
+    - cmake
 before_script:
+- 
+script:
+- 
+before_install:
 - pip -V
 - pip install --user invoke
 - pip install --user pipenv
 - git clone https://github.com/yonikashi/blocktest.git
-script:
+install:
 - cd blocktest
 - pipenv sync
 - pipenv run invoke build-core --version=10.0.0
 - docker images
 - docker tag images_stellar-core yonikashi/blocktest:$COMMIT
-after_success:
+### Docker Image Tagging Rules ###
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
 - export REPO=yonikashi/blocktest
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
   ; fi`
 - echo $REPO:$TAG:$COMMIT
 - docker push yonikashi/blocktest
+
+after_success: |
+  wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
+  tar xzf master.tar.gz &&
+  cd kcov-master &&
+  mkdir build &&
+  cd build &&
+  cmake .. &&
+  make &&
+  sudo make install &&
+  cd ../.. &&
+  rm -rf kcov-master &&
+  mkdir -p coverage &&
+  kcov coverage script.sh &&
+  bash <(curl -s https://codecov.io/bash)
+
 cache:
   directories:
   - "$HOME/.ccache"
