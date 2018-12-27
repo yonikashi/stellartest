@@ -45,13 +45,13 @@ before_install:
 - pip -V
 - pip install --user invoke
 - pip install --user pipenv
-- git clone https://github.com/yonikashi/blocktest.git
+- git clone https://github.com/kinecosystem/blockchain-ops.git
 install:
-- cd blocktest
+- cd blockchain-ops
 - pipenv sync
-- pipenv run invoke build-core --version=10.0.0
+- pipenv run invoke build-core --branch="kinecosystem/master" --version="10.0.0" -p True
 - docker images
-- docker tag images_stellar-core yonikashi/blocktest:$COMMIT
+- docker tag kinecosystem/stellar-core yonikashi/blocktest:$TRAVIS_BRANCH-$COMMIT
 ### Docker Image Tagging Rules ###
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
 - export REPO=yonikashi/blocktest
