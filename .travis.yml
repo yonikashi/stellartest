@@ -1,4 +1,14 @@
-language: go 
+matrix:
+  include:
+    - language: cpp
+      compiler: clang
+#     script:
+    - language: go
+      go: '1.8'
+      before_script:
+        - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
+        - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
+        - cp linux-amd64/glide $GOPATH/bin
 dist: xenial
 sudo: false
 #compiler:
@@ -14,8 +24,6 @@ env:
   - secure: kPtRDBk/OavR0wHpysHkGsmmbKR48revOVwb/h0nTgIBfHUhsvSvZwAZ7gJqB8zzQN0BVKZ8GXXNSmvFca/LFsL/uSUXYXWTKlrXz7ozJcgIK6c61iurZ2KUmZEbx80v8VEfe31g2um2exL82aozWxwW+tw2MDaowm0rhEZfO0jQEXihGY/3ESZj3h+ikdwIsD+vkSrOP7Mujli9Oi8r83shWDiWH36EiSDoWrxmCZtjnXGUsTaYvlfdEzgUdPAaWROt4kbpp+D+aAWGPJU1YYHGWXkqNhvOwFMP0bk9pbTajRTiX4xirct3H3CwEBXrVEZ4I/OOnw4YHtRHDQPUZ0yrLwMNu8T4MLa7rGovo/hNV9Q3pi9Ml24D1HCMj4gErftjFlbsrdWGqIDYnSOLc1IChZ7M7avlvpakhcjvAuntQ4WcxP8YRFNte/Qok0FEipucHOmuYW9J8WDeYHWlHKXjO+lzZk9xn5PiHR10ZqrjxTWxWVMvkZn1SuY5IDTFacqRabYLyZVhOvZaFe/1Il4ANYNTmxcB69taiE389ZAZx2wjn2bW1EjApv8AmKS+xQYrI1lrGCiKwSrvpiRbz29UHhViFEn91klGTdLFBKcVmLKhyyJ0mrynRO9wDcQfgBppUsGuYS2X0tafJ+pqqatFQMmJukI2kJ8ICh6XzxQ=
 services:
 - docker
-go:
-- '1.8'
 addons:
   postgresql: '9.4'
   apt:
@@ -40,9 +48,7 @@ addons:
     - libdw-dev
     - cmake
 before_script:
-- wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
-- tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
-- cp linux-amd64/glide $GOPATH/bin
+-
 script:
 - 
 before_install:
@@ -50,11 +56,11 @@ before_install:
 - pip install --user invoke
 - pip install --user pipenv
 - git clone https://github.com/kinecosystem/blockchain-ops.git
-install:
 - cd blockchain-ops
 - pipenv sync
 #- pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" 
-- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon"   
+#- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon"   
+install:
 - docker images
 - docker tag kinecosystem/stellar-core yonikashi/blocktest:$TRAVIS_BRANCH-$COMMIT
 ### Docker Image Tagging Rules ###
