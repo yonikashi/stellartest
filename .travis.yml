@@ -63,7 +63,7 @@ before_install:
 - pipenv sync
 - if [[ "$BUILD_TYPE" == "cpp" ]]; then pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" ; fi
 #- pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" 
-- if [[ "BUILD_TYPE" == "go" ]]; then pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon" ; fi
+- if [[ "$BUILD_TYPE" == "go" ]]; then pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon" ; fi
 #- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon"   
 install:
 - docker images
