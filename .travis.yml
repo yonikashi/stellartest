@@ -4,7 +4,7 @@ matrix:
       compiler: clang
 #     script:
     - language: go
-      go: '1.8'
+      go: 1.8
       before_script:
         - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
         - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
