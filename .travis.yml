@@ -2,19 +2,16 @@ matrix:
   include:
     - language: cpp
       compiler: clang
-     script:
-        - pip install --user pipenv invoke 
-        - git clone https://github.com/kinecosystem/blockchain-ops.git && cd blockchain-ops
-        - pipenv sync && pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0"
+      env:
+        - BUILD_TYPE="cpp"
     - language: go
       go: '1.8'
+      env:
+        - BUILD_TYPE="go"
       script:
         - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
         - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
-        - cp linux-amd64/glide $GOPATH/bin
-        - pip install --user pipenv invoke
-        - git clone https://github.com/kinecosystem/blockchain-ops.git && cd blockchain-ops
-        - pipenv sync && pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" -app="horizion"
+        - cp linux-amd64/glide $GOPATH/bin       
 dist: xenial
 sudo: false
 #compiler:
@@ -58,13 +55,15 @@ before_script:
 script:
 - 
 before_install:
-#- pip -V
-#- pip install --user invoke
-#- pip install --user pipenv
-#- git clone https://github.com/kinecosystem/blockchain-ops.git
-#- cd blockchain-ops
-#- pipenv sync
+- pip -V
+- pip install --user invoke
+- pip install --user pipenv
+- git clone https://github.com/kinecosystem/blockchain-ops.git
+- cd blockchain-ops
+- pipenv sync
+- if [[ "$BUILD_TYPE" == "cpp" ]]; then pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" ; fi
 #- pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" 
+- if [[ "BUILD_TYPE" == "go" ]]; then pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon" ; fi
 #- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon"   
 install:
 - docker images
