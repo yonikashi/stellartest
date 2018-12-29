@@ -2,13 +2,20 @@ matrix:
   include:
     - language: cpp
       compiler: clang
-#     script:
+     script:
+        - pip install --user pipenv invoke 
+        - git clone https://github.com/kinecosystem/blockchain-ops.git && cd blockchain-ops
+        - pipenv sync && pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0"
     - language: go
       go: 1.8
       before_script:
         - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
         - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
         - cp linux-amd64/glide $GOPATH/bin
+      script:
+        - pip install --user pipenv invoke
+        - git clone https://github.com/kinecosystem/blockchain-ops.git && cd blockchain-ops
+        - pipenv sync && pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" -app="horizion"
 dist: xenial
 sudo: false
 #compiler:
@@ -52,12 +59,12 @@ before_script:
 script:
 - 
 before_install:
-- pip -V
-- pip install --user invoke
-- pip install --user pipenv
-- git clone https://github.com/kinecosystem/blockchain-ops.git
-- cd blockchain-ops
-- pipenv sync
+#- pip -V
+#- pip install --user invoke
+#- pip install --user pipenv
+#- git clone https://github.com/kinecosystem/blockchain-ops.git
+#- cd blockchain-ops
+#- pipenv sync
 #- pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" 
 #- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon"   
 install:
