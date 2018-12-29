@@ -50,6 +50,7 @@ install:
 - cd blockchain-ops
 - pipenv sync
 - pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" 
+- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="V9RC2.0"   
 - docker images
 - docker tag kinecosystem/stellar-core yonikashi/blocktest:$TRAVIS_BRANCH-$COMMIT
 ### Docker Image Tagging Rules ###
