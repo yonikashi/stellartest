@@ -3,11 +3,11 @@ matrix:
     - language: cpp
       compiler: clang
       env:
-        - BUILD_TYPE="cpp"
+        - BUILD_TYPE="stellar-core"
     - language: go
       go: '1.8'
       env:
-        - BUILD_TYPE="go"
+        - BUILD_TYPE="horizon"
       script:
         - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
         - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
@@ -19,6 +19,7 @@ sudo: false
 #- gcc
 env:
   global:
+  - TAG="v.9.2.0"
   - CODECOV_TOKEN="e1453df7-ea2c-4282-b045-8cd61b95ce28"
   - GIT_BRANCH=latest
   - COMMIT=${TRAVIS_COMMIT::6}
@@ -61,13 +62,13 @@ before_install:
 - git clone https://github.com/kinecosystem/blockchain-ops.git
 - cd blockchain-ops
 - pipenv sync
-- if [[ "$BUILD_TYPE" == "cpp" ]]; then pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" ; fi
+- if [[ "$BUILD_TYPE" == "stellar-core" ]]; then pipenv run invoke build-core --branch="kinecosystem/master" --version=$TAG" ; fi
 #- pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" 
-- if [[ "$BUILD_TYPE" == "go" ]]; then pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon" ; fi
+- if [[ "$BUILD_TYPE" == "horizon" ]]; then pipenv run invoke build-go --branch="kinecosystem/master" --version=$TAG --app="horizon" ; fi
 #- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon"   
 install:
 - docker images
-- docker tag kinecosystem/stellar-core yonikashi/blocktest:$TRAVIS_BRANCH-$COMMIT
+- docker tag kinecosystem/$BUILD_TYPE yonikashi/blocktest:$BUILD_TYPE-$TRAVIS_BRANCH-$COMMIT-$TAG
 ### Docker Image Tagging Rules ###
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
 - export REPO=yonikashi/blocktest
