@@ -1,22 +1,19 @@
 matrix:
   include:
-    - language: cpp
-      compiler: clang
-      env:
-        - BUILD_TYPE="stellar-core"
-    - language: go
-      go: '1.8'
-      env:
-        - BUILD_TYPE="horizon"
-      script:
-        - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
-        - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
-        - cp linux-amd64/glide $GOPATH/bin       
+  - language: cpp
+    compiler: clang
+    env:
+    - BUILD_TYPE="stellar-core"
+  - language: go
+    go: '1.8'
+    env:
+    - BUILD_TYPE="horizon"
+    script:
+    - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
+    - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
+    - cp linux-amd64/glide $GOPATH/bin
 dist: xenial
 sudo: false
-#compiler:
-#- clang
-#- gcc
 env:
   global:
   - TAG="v.9.2.0"
@@ -29,7 +26,11 @@ env:
 services:
 - docker
 addons:
-  postgresql: '9.4'
+- sonarcloud:
+    organization: "yonikashi-github"
+    token:
+   - secure: Gjt+8qDKOpB196u7zcjGvNjScKvGWGcmvfjtVEGUuT5ipl8n53gjKhj5qIHZe/QxEynxEwJfIe0u1zex9AUPo/FXvTGl0XxwCU+/mA3pp5adcPJ16CpMOXsJF7eMGssV4B1sz0naYlEgWTczTtdg5B6uKcVWMb5ggo24qsp9PzWUp0wb0R2wm3JnH9ID2bNs0B/dfI++3jJWeqQ7AeeKk2JkoleL+j4vIMvTelW2Bb3pVFZ0BbdksN98DSVrJgdLz6fqq71ojsxgTJysY1sZnKXu5yn6thE+ZnEXN1SHADEW7LEi5ovWG3nKLMEdDdgBWDf3XQGxsrsRMttTrltZu43t9Xq04u2w6obRc3zQj3G55qOUVe/6cscRZE1D/0bmVoUrSYP0EsI0IhCf7iOkwBbgG2tR4d9cHDFotJOc3NixnMJ9bc+R5/SP+0FNRqxB5MqXWyo8YdC2NBbQVGITGVnv9o1zz14KtdxL91SfFGI5PuwGQBkAj2hA/utuC+BxqfCQGhWKTcOCrgT4TS5MB/5unZssju6cJjDMlbz06/KyzY5kUgMPgKFqnl5lIglnFWh8x1xUHrrYxQFUIKvTwvK9GbE1tz76KSTE7+PMOWN9tJTpCebgpLOsLK7kjkPmll5n7FrIYn37COGQe+p3JBTiN3r9GosL+DhHg7t+Tvw=
+- postgresql: '9.4'
   apt:
     sources:
     - ubuntu-toolchain-r-test
@@ -52,7 +53,7 @@ addons:
     - libdw-dev
     - cmake
 before_script:
--
+- 
 script:
 - 
 before_install:
@@ -62,14 +63,13 @@ before_install:
 - git clone https://github.com/kinecosystem/blockchain-ops.git
 - cd blockchain-ops
 - pipenv sync
-- if [[ "$BUILD_TYPE" == "stellar-core" ]]; then pipenv run invoke build-core --branch="kinecosystem/master" --version=$TAG ; fi
-#- pipenv run invoke build-core --branch="kinecosystem/master" --version="v9.2.0" 
-- if [[ "$BUILD_TYPE" == "horizon" ]]; then pipenv run invoke build-go --branch="kinecosystem/master" --version=$TAG --app="horizon" ; fi
-#- pipenv run invoke build-go --branch="kinecosystem/master" --version="v9.2.0" --app="horizon"   
+- if [[ "$BUILD_TYPE" == "stellar-core" ]]; then pipenv run invoke build-core --branch="kinecosystem/master"
+  --version=$TAG ; fi
+- if [[ "$BUILD_TYPE" == "horizon" ]]; then pipenv run invoke build-go --branch="kinecosystem/master"
+  --version=$TAG --app="horizon" ; fi
 install:
 - docker images
 - docker tag kinecosystem/$BUILD_TYPE yonikashi/blocktest:$BUILD_TYPE-$TRAVIS_BRANCH-$COMMIT-$TAG
-### Docker Image Tagging Rules ###
 - docker login --username=$DOCKER_USER -p $DOCKER_PASS
 - export REPO=yonikashi/blocktest
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
@@ -90,7 +90,6 @@ after_success: |
   mkdir -p coverage &&
   kcov coverage script.sh &&
   sudo bash <(curl -s https://codecov.io/bash)
-
 cache:
   directories:
   - "$HOME/.ccache"
