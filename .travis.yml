@@ -67,7 +67,7 @@ before_install:
   --version=$TAG ; fi
 - if [[ "$BUILD_TYPE" == "horizon" ]]; then pipenv run invoke build-go --branch="kinecosystem/master"
   --version=$TAG --app="horizon" ; fi
-- sonnar-scanner
+- sonar-scanner
 install:
 - docker images
 - docker tag kinecosystem/$BUILD_TYPE yonikashi/blocktest:$BUILD_TYPE-$TRAVIS_BRANCH-$COMMIT-$TAG
