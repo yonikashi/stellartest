@@ -4,10 +4,10 @@ matrix:
     compiler: clang
     env:
     - BUILD_TYPE="stellar-core"
-  - language: go
-    go: '1.8'
-    env:
-    - BUILD_TYPE="horizon"
+#  - language: go
+#    go: '1.8'
+#    env:
+#    - BUILD_TYPE="horizon"
     script:
     - wget https://github.com/Masterminds/glide/releases/download/v0.12.3/glide-v0.12.3-linux-amd64.tar.gz
     - tar -xzvf glide-v0.12.3-linux-amd64.tar.gz
@@ -17,7 +17,6 @@ sudo: false
 env:
   global:
   - TAG="v.9.2.0"
-  - CODECOV_TOKEN="e1453df7-ea2c-4282-b045-8cd61b95ce28"
   - GIT_BRANCH=latest
   - COMMIT=${TRAVIS_COMMIT::6}
   - secure: Zh0g3+pGnCvPAC0oYSXuWJj+NWIxZMVVshsrZOmNYDdYrGAMeS1aTQE3Tg8bK+1Hn6dlGSTxq6W4rAUnV3hazueXfOwF/Y0Bojd+q86fX6/eT1YwCVEGmEIxKzv/FCCfTlzNuUCYe+UJ0eNL1Vj9J6MykU2Ibv+tdd9KLWM3K3mdpNoycZMzt3f2aOf6u9ymct6e4+rVDBayZKksoCKiKAJGJCR7R5RcZ6/PolkRT5YfbsYXFYl0+3RDHYuOooOk/bqTDD3U5jrEOC1Gv8z2FOm+Dun9xuhULgswktOcQw8EQkjXVbIvrRWGRn+4+FsdjZqS1XtySub55hXj2TgmYfwS8fP5O4nqQ9ldeECZX9VCrrEvjHUGlq75MUwNGLPw4/JEPMcIwfIjf/k0wgj3SBT2w1RG/gNYHkGnQoWwghBVy7yvQC+TRiaQB2u0U0pKvVmRf48WlAiBO93DFdT1YXLawq0GCRBdPubwoV0Hh3m6Th6iOa0FH23pY15QSD2ysEnqY1kdNqbyATZ54BaSyjo6avGG/P7oEXhPBwh6ufSXvjlie2o6tkE7FGFJfln6flYU838uW50AeEHvPP3FvTzJqEqmrYwi2JUV2kn0wn4TQENyAKKuPP4kW8qdAj8C058Zw/6hx+NIeTCcnY01W3aMoa0a71z+gj87Z64sD6Y=
@@ -60,14 +59,14 @@ before_install:
 - pip -V
 - pip install --user invoke
 - pip install --user pipenv
-- git clone https://github.com/kinecosystem/blockchain-ops.git
-- cd blockchain-ops
+- git clone https://github.com/yonikashi/blocktest.git
+- cd blocktest
 - pipenv sync
 - if [[ "$BUILD_TYPE" == "stellar-core" ]]; then pipenv run invoke build-core --branch="kinecosystem/master"
   --version=$TAG ; fi
 - if [[ "$BUILD_TYPE" == "horizon" ]]; then pipenv run invoke build-go --branch="kinecosystem/master"
   --version=$TAG --app="horizon" ; fi
-- sonar-scanner
+#- sonar-scanner
 install:
 - docker images
 - docker tag kinecosystem/$BUILD_TYPE yonikashi/blocktest:$BUILD_TYPE-$TRAVIS_BRANCH-$COMMIT-$TAG

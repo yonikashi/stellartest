@@ -1,0 +1,51 @@
+Mon Dec 31 12:12:21 2018: build-wrapper, version 6.0 (linux-x86)
+Mon Dec 31 12:12:21 2018: System name: Linux Nodename: ubuntu Release: 4.4.0-131-generic Version: #157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 Machine: x86_64
+Mon Dec 31 12:12:21 2018: socket path: /tmp/build-wrapper-socket.lEfq19
+Mon Dec 31 12:12:21 2018: dynamic library found: /root/build-wrapper-linux-x86/libinterceptor-i686.so
+Mon Dec 31 12:12:21 2018: dynamic library found: /root/build-wrapper-linux-x86/libinterceptor-x86_64.so
+Mon Dec 31 12:12:21 2018: command executed as: <build-wrapper-linux-x86-64>
+Mon Dec 31 12:12:21 2018: command line received: <make clean all>
+Mon Dec 31 12:12:21 2018: env 0: <SHELL=/bin/bash>
+Mon Dec 31 12:12:21 2018: env 1: <TERM=xterm-256color>
+Mon Dec 31 12:12:21 2018: env 2: <OLDPWD=/root>
+Mon Dec 31 12:12:21 2018: env 3: <USER=root>
+Mon Dec 31 12:12:21 2018: env 4: <LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:>
+Mon Dec 31 12:12:21 2018: env 5: <SUDO_USER=jony>
+Mon Dec 31 12:12:21 2018: env 6: <SUDO_UID=1000>
+Mon Dec 31 12:12:21 2018: env 7: <USERNAME=root>
+Mon Dec 31 12:12:21 2018: env 8: <MAIL=/var/mail/root>
+Mon Dec 31 12:12:21 2018: env 9: <PATH=/root/build-wrapper-linux-x86:/root/sonarqube/sonarqube-7.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin>
+Mon Dec 31 12:12:21 2018: env 10: <PWD=/root/stellartest>
+Mon Dec 31 12:12:21 2018: env 11: <LANG=en_US.UTF-8>
+Mon Dec 31 12:12:21 2018: env 12: <SHLVL=1>
+Mon Dec 31 12:12:21 2018: env 13: <SUDO_COMMAND=/bin/bash>
+Mon Dec 31 12:12:21 2018: env 14: <HOME=/root>
+Mon Dec 31 12:12:21 2018: env 15: <LANGUAGE=en_US:en>
+Mon Dec 31 12:12:21 2018: env 16: <LOGNAME=root>
+Mon Dec 31 12:12:21 2018: env 17: <LESSOPEN=| /usr/bin/lesspipe %s>
+Mon Dec 31 12:12:21 2018: env 18: <SUDO_GID=1000>
+Mon Dec 31 12:12:21 2018: env 19: <LESSCLOSE=/usr/bin/lesspipe %s %s>
+Mon Dec 31 12:12:21 2018: env 20: <_=/root/build-wrapper-linux-x86/build-wrapper-linux-x86-64>
+Mon Dec 31 12:12:21 2018: executing: <make clean all>
+Mon Dec 31 12:12:21 2018: initializing json file
+Mon Dec 31 12:12:21 2018: process created with pid: 672
+Mon Dec 31 12:12:21 2018: parent pid: 671
+Mon Dec 31 12:12:21 2018: working directory: </root/stellartest>
+Mon Dec 31 12:12:21 2018: executable: </root/build-wrapper-linux-x86/build-wrapper-linux-x86-64>
+Mon Dec 31 12:12:21 2018: argv[0]: <build-wrapper-linux-x86-64>
+Mon Dec 31 12:12:21 2018: argv[1]: <-c>
+Mon Dec 31 12:12:21 2018: argv[2]: <>
+Mon Dec 31 12:12:21 2018: argv[3]: <make>
+Mon Dec 31 12:12:21 2018: argv[4]: <clean>
+Mon Dec 31 12:12:21 2018: argv[5]: <all>
+Mon Dec 31 12:12:21 2018: skipping process with pid: 672
+Mon Dec 31 12:12:21 2018: process created with pid: 673
+Mon Dec 31 12:12:21 2018: parent pid: 672
+Mon Dec 31 12:12:21 2018: working directory: </root/stellartest>
+Mon Dec 31 12:12:21 2018: executable: </usr/bin/make>
+Mon Dec 31 12:12:21 2018: argv[0]: <make>
+Mon Dec 31 12:12:21 2018: argv[1]: <clean>
+Mon Dec 31 12:12:21 2018: argv[2]: <all>
+Mon Dec 31 12:12:21 2018: skipping process with pid: 673
+Mon Dec 31 12:12:21 2018: finalizing json file
+Mon Dec 31 12:12:21 2018: returned with code: 2
