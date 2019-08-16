@@ -62,9 +62,9 @@ before_install:
 - git clone https://github.com/yonikashi/blocktest.git
 - cd blocktest
 - pipenv sync
-- if [[ "$BUILD_TYPE" == "stellar-core" ]]; then pipenv run invoke build-core --branch="kinecosystem/master"
+- if [[ "$BUILD_TYPE" == "stellar-core" ]]; then pipenv run invoke build-core --branch="master"
   --version=latest ; fi
-- if [[ "$BUILD_TYPE" == "horizon" ]]; then pipenv run invoke build-go --branch="kinecosystem/master"
+- if [[ "$BUILD_TYPE" == "horizon" ]]; then pipenv run invoke build-go --branch="master"
   --version=$TAG --app="horizon" ; fi
 #- sonar-scanner
 install:
