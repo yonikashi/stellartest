@@ -33,7 +33,7 @@ script:
 - git clone https://github.com/kinecosystem/blockchain-ops.git && cd blockchain-ops
 - pip -V
 - pipenv sync
-- pipenv run invoke build-core --branch=$TRAVIS_BRANCH --version=kinecosystem-v2.1.0-stellar-v9.2.0-rc1
+- pipenv run invoke build-core --branch=$TRAVIS_BRANCH --version=kinecosystem-v2.1.0-stellar-v9.2.0
 cache:
   directories:
   - $HOME/.ccache
