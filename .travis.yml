@@ -1,12 +1,13 @@
-language: python
-python:
-- 3.7-dev
-os: linux
+language: cpp
 dist: xenial
-sudo: true
+sudo: false
+compiler:
+- clang
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::6}
+services:
+  - docker
 addons:
   postgresql: "9.5"
   apt:
