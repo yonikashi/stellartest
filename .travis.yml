@@ -59,8 +59,8 @@ before_install:
 - pip -V
 - pip install --user invoke
 - pip install --user pipenv
-- git clone https://github.com/yonikashi/blocktest.git
-- cd blocktest
+- git clone https://github.com/kinecosystem/blockchain-ops.git
+- cd blockchain-ops
 - pipenv sync
 - if [[ "$BUILD_TYPE" == "stellar-core" ]]; then pipenv run invoke build-core --branch="master"
   --version=latest ; fi
