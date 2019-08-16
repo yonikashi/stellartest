@@ -28,10 +28,6 @@ addons:
     - pandoc
     - libffi-dev
 before_script:
-- git describe --tags >> describe.txt
-- export MY_TAG="$(cat describe.txt)"
-- export GIT_TAG=`if [ "$TRAVIS_BRANCH" == "kinecosystem/master" ]; then echo "master"; else echo $TRAVIS_BRANCH
-  ; fi`
 script:
 - mkdir $COMMIT && cd $COMMIT
 - git clone https://github.com/kinecosystem/blockchain-ops.git && cd blockchain-ops
